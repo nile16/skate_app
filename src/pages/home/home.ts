@@ -11,35 +11,34 @@ export class HomePage {
 
   constructor(public navCtrl: NavController) {
 
-  var self = this;
-  this.tags = {};
-  this.lat  = false;
-  this.lon  = false;
-  this.takenTime = false;
+    var self = this;
+    this.tags = {};
+    this.lat  = false;
+    this.lon  = false;
+    this.takenTime = false;
 
   }
 
 
   ionViewDidLoad(){
 
-  // Get tags from database and make a checkbox list
-  var xhrTag =  new XMLHttpRequest();
-  xhrTag.open('GET', 'http://nile16.nu:5984/misc/tags', true);
-  xhrTag.onreadystatechange = function(response) {
-  if (xhrTag.readyState == 4) {
-  	self.tags = JSON.parse(xhrTag.response).value;
-  	var html = "";
-  	for (var i=0;i<self.tags.length;i++){
-  		html += "<input type='checkbox' id='tag"+i+"'> "+self.tags[i]+"<br>"
+    // Get tags from database and make a checkbox list
+    var xhrTag =  new XMLHttpRequest();
+    xhrTag.open('GET', 'http://nile16.nu:5984/misc/tags', true);
+    xhrTag.onreadystatechange = function(response) {
+    if (xhrTag.readyState == 4) {
+      self.tags = JSON.parse(xhrTag.response).value;
+  	  var html = "";
+      for (var i=0;i<self.tags.length;i++){
+  		   html += "<input type='checkbox' id='tag"+i+"'> "+self.tags[i]+"<br>"
+      }
+      formDiv.innerHTML=html;
   	}
-  	formDiv.innerHTML=html;
-  	}
-
   }
   xhrTag.send();
 
   function toDecimal(number) {
-         return number[0].num/number[0].den + (number[1].num/(60 * number[1].den)) + (number[2].num/(3600 * number[2].den));
+    return number[0].num/number[0].den + (number[1].num/(60 * number[1].den)) + (number[2].num/(3600 * number[2].den));
   };
 
   fileInput.addEventListener("change",function(e) {
@@ -53,9 +52,12 @@ export class HomePage {
   		self.takenTime = false;
   		fileReaderExif.onloadend = function() {
   			var meta = (new JpegMeta.JpegFile(this.result, file.name).metaGroups);
-  			self.lat  = toDecimal(meta.gps.GPSLatitude.value).toFixed(5);
-  			self.lon  = toDecimal(meta.gps.GPSLongitude.value).toFixed(5);
-  			self.takenTime = meta.exif.DateTimeOriginal.value;
+  			if (meta.gps){
+          self.lat  = toDecimal(meta.gps.GPSLatitude.value).toFixed(5);
+          self.lon  = toDecimal(meta.gps.GPSLongitude.value).toFixed(5);
+        }
+  			if (meta.exif&&meta.exif.DateTimeOriginal)
+          self.takenTime = meta.exif.DateTimeOriginal.value;
   		};
   		fileReaderExif.readAsBinaryString(file);
   	}
