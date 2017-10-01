@@ -1,14 +1,23 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Skateappen
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+  <div id="picDiv" style="width:320px; height:170px; ">
+		<img id="picture" style="max-width:100%;max-height:100%"/><br>
+	</div>
+	<input type="file" id="fileInput" name="file" /><br><br>
+	Beskrivning av bilden:<br>
+	<textarea id="description" rows="4" cols="50"></textarea><br><br>
+	Nick:<br>
+	<input type="text" id="nick" /><br><br>
+	Välj passande taggar:
+	<div id="formDiv"></div>
+	<br><br><button (click)="uploadFile()">Upload to Skate</button>
+
 </ion-content>
