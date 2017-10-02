@@ -26,16 +26,15 @@ export class HomePage {
     var xhrTag =  new XMLHttpRequest();
     xhrTag.open('GET', 'http://nile16.nu:5984/misc/tags', true);
     xhrTag.onreadystatechange = function(response) {
-    if (xhrTag.readyState == 4) {
-      self.tags = JSON.parse(xhrTag.response).value;
-  	  var html = "";
-      for (var i=0;i<self.tags.length;i++){
-  		   html += "<input type='checkbox' id='tag"+i+"'> "+self.tags[i]+"<br>"
-      }
-      formDiv.innerHTML=html;
-  	}
-  }
-  xhrTag.send();
+      if (xhrTag.readyState == 4) {
+        self.tags = JSON.parse(xhrTag.response).value;
+  	     var html = "";
+         for (var i=0;i<self.tags.length;i++)
+  		     html += "<input type='checkbox' id='tag"+i+"'> "+self.tags[i]+"<br>"
+         formDiv.innerHTML=html;
+  	   }
+    }
+    xhrTag.send();
 
   function toDecimal(number) {
     return number[0].num/number[0].den + (number[1].num/(60 * number[1].den)) + (number[2].num/(3600 * number[2].den));
