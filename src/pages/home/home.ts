@@ -29,7 +29,7 @@ file: any;
          formDiv.innerHTML=html;
   	   });
 
-  // Create listener that show the selected picture
+  // Create listener that display the selected picture when a picture is selected.
   fileInput.addEventListener("change",(e) => {
     var fileReaderImg = new FileReader();
   	this.file = e.target.files[0];
@@ -63,47 +63,11 @@ uploadFile(){
     //console.log(meta);
     this.skate.upload(this.file,meta,function(x){
       console.log(x);
+      alert("Uppladdning klar!")
     });
 
   });
 }
-
-//uploadFile() {
-//  var url = 'http://nile16.nu:5984/media/';
-//  var fileReader = new FileReader();
-//  var file = fileInput.files[0];
-//  var xhr1 =  new XMLHttpRequest();
-//  xhr1.open('POST', url, true);
-//  xhr1.setRequestHeader("Content-Type", "application/json");
-//  xhr1.onreadystatechange = function(response) {
-//    if (xhr1.readyState == 4) {
-//      var docId = JSON.parse(xhr1.response).id;
-//      var docRev = JSON.parse(xhr1.response).rev;
-//      var name = encodeURIComponent(file.name);
-//      var type = file.type;
-//      var xhr2 = new XMLHttpRequest();
-//      xhr2.open('PUT', url+docId+'/'+name+'?rev='+docRev, true);
-//      xhr2.setRequestHeader('Content-Type', type);
-//      xhr2.onreadystatechange = function(response) {
-//        if (xhr2.readyState == 4) {
-//          console.log(xhr2.response);
-//          alert("Uploaded!");
-//        }
-//      }
-//      fileReader.onload = function (readerEvent) {
-//        xhr2.send(readerEvent.target.result);
-//      };
-//      fileReader.readAsArrayBuffer(file);
-//    }
-//  }
-//  var selectedTags = [];
-//  for (var i=0;i<self.tags.length;i++){
-//    if (document.getElementById("tag"+i).checked) selectedTags.push(self.tags[i]);
-//  }
-  //var uploadTime = Math.floor((new Date().getTime())/1000);
-//  var uploadTime = (new Date()).toString();
-//  xhr1.send(JSON.stringify({description:description.value.trim(),nick:nick.value.trim(),tags:selectedTags,uploadTime:uploadTime,takenTime:takenTime,lat:lat,lon:lon}));
-//}
 
 
 }
