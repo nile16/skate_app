@@ -28,8 +28,8 @@ getTags(callback){
   getExif(file,callback){
       var self=this;
       var fileReaderExif = new FileReader();
-  		var lat  = false;
-  		var lon  = false;
+  		var lat  = null;
+  		var lon  = null;
   		var takenTime = false;
   		fileReaderExif.onloadend = function() {
   			var meta = (new JpegMeta.JpegFile(this.result, file.name).metaGroups);

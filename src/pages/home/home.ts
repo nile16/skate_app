@@ -9,12 +9,12 @@ import {Skate} from '../../assets/skate';
 })
 export class HomePage {
 
-tags: any = {};
-file: any;
+  tags: any = {};
+  file: any;
+  nick:string = "";
+  description:string = "";
 
   constructor(public navCtrl: NavController,private skate: Skate) {
-
-    //this.tags = {};
 
   }
 
@@ -45,22 +45,28 @@ file: any;
 // This function is executed when the upload button is pressed
 uploadFile(){
 
-  var meta = {};
+  var meta = {
+    tags:[],
+    nick:"",
+    description:""
+  };
 
   // Check which tags are selected and add those to meta in the form of an array
-  meta.tags = [];
+  //meta.tags = [];
   for (var i=0;i<this.tags.length;i++){
     if (document.getElementById("tag"+i).checked) meta.tags.push(this.tags[i]);
   }
 
-  meta.nick = nick.value.trim();
+  //meta.nick = nick.value.trim();
+  meta.nick = this.nick.trim();
 
-  meta.description = description.value.trim();
+  //meta.description = description.value.trim();
+  meta.description = this.description.trim();
 
   this.skate.getExif(this.file,(exif) => {
 
     Object.assign(meta,exif);
-    //console.log(meta);
+    console.log(meta);
     this.skate.upload(this.file,meta,function(x){
       console.log(x);
       alert("Uppladdning klar!")

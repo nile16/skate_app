@@ -12,9 +12,9 @@
 	</div>
 	<input type="file" id="fileInput" name="file" /><br><br>
 	Beskrivning av bilden:<br>
-	<textarea id="description" rows="4" cols="50"></textarea><br><br>
+	<textarea [(ngModel)]="description" rows="4" cols="50"></textarea><br><br>
 	Nick:<br>
-	<input type="text" id="nick" /><br><br>
+	<input type="text" [(ngModel)]="nick" /><br><br>
 	Välj passande taggar:
 	<div id="formDiv"></div>
 	<br><br><button (click)="uploadFile()">Upload to Skate</button>
