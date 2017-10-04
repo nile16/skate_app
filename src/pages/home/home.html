@@ -7,19 +7,32 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-list>
+  <ion-item>
   <div id="picDiv" style="width:320px; height:170px; ">
 		<img id="picture" style="max-width:100%;max-height:100%"/><br>
 	</div>
 	<input type="file" id="fileInput" name="file" /><br><br>
+  </ion-item>
 
-	Beskrivning av bilden:<br>
-	<textarea [(ngModel)]="description" rows="4" cols="50"></textarea><br><br>
+  <ion-item>
+  <ion-label floating>Beskriv bilden:</ion-label>
+	<ion-input type="text" [(ngModel)]="description" rows="4" cols="50"></ion-input>
+  </ion-item>
 
-	Nick:<br>
-	<input type="text" [(ngModel)]="nick" /><br><br>
+  <ion-item>
+  <ion-label floating>Nick:</ion-label>
+	<ion-input type="text" [(ngModel)]="nick" ></ion-input><br><br>
+  </ion-item>
 
-	Välj passande taggar:
-	<div id="formDiv"></div>
-	<br><br><button (click)="uploadFile()">Upload to Skate</button>
 
+  <ion-label>Välj passande taggar:</ion-label>
+  <ion-item *ngFor="let name of tags">
+    <ion-label>{{name.Name}}</ion-label>
+    <ion-checkbox [(ngModel)]="name.Value" ></ion-checkbox>
+  </ion-item>
+
+	<br><br><button (click)="uploadFile()" ion-button >Upload to Skate</button>
+
+</ion-list>
 </ion-content>

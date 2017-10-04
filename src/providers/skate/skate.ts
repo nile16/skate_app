@@ -42,15 +42,15 @@ public version: string = "1.0";
         var result = [];
         for (var i=0;i<rows.length;i++){
           var temp = {
-          description:false,
-          nick:false,
-          tags:false,
-          takenTime:false,
-          uploadTime:false,
-          lat:false,
-          lon:false,
+          description:null,
+          nick:null,
+          tags:null,
+          takenTime:null,
+          uploadTime:null,
+          lat:null,
+          lon:null,
           //mediaType:false,
-          url:false
+          url:null
           }
           if (rows[i].doc.description) temp.description = rows[i].doc.description;
           if (rows[i].doc.nick) temp.nick = rows[i].doc.nick;

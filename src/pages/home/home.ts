@@ -9,28 +9,24 @@ import { SkateProvider } from '../../providers/skate/skate';
 })
 export class HomePage {
 
-  tags: any = {};
   file: any;
   nick:string = "";
   description:string = "";
 
+  tags = [];
+
 
   constructor(public navCtrl: NavController, public skate:SkateProvider) {
-    console.log("Skate version: ",this.skate.version);
     //this.skate.getMedia(function(media){console.log(media)});
   }
 
 
   ionViewDidLoad(){
-    var names = [{ Name:'item-1', Value:false},
-             { Name:'item-2', Value:false}];
+
     // Get tags from skate database and create a checkbox tag list
     this.skate.getTags((tags)=>{
-         this.tags=tags;
-  	     var html = "";
          for (var i=0;i<tags.length;i++)
-  		     html += "<input type='checkbox' id='tag"+i+"'> "+tags[i]+"<br>";
-         formDiv.innerHTML=html;
+  		     this.tags.push({Name:tags[i],Value:false});
   	   });
 
   // Create listener that display the selected picture when a picture is selected.
@@ -58,7 +54,7 @@ uploadFile(){
   // Check which tags are selected and add those to meta in the form of an array
   //meta.tags = [];
   for (var i=0;i<this.tags.length;i++){
-    if (document.getElementById("tag"+i).checked) meta.tags.push(this.tags[i]);
+    if (this.tags[i].Value) meta.tags.push(this.tags[i].Name);
   }
 
   //meta.nick = nick.value.trim();
@@ -71,8 +67,8 @@ uploadFile(){
 
     Object.assign(meta,exif);
     console.log(meta);
-    this.skate.upload(this.file,meta,function(x){
-      console.log(x);
+    this.skate.upload(this.file,meta,function(res){
+      console.log(res);
       alert("Uppladdning klar!")
     });
 
