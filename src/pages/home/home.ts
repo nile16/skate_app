@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 //import {Platform, ionicBootstrap} from 'ionic-angular';
-import {Skate} from '../../assets/skate';
+import { SkateProvider } from '../../providers/skate/skate';
 
 @Component({
   selector: 'page-home',
@@ -14,8 +14,8 @@ export class HomePage {
   nick:string = "";
   description:string = "";
 
-  constructor(public navCtrl: NavController,private skate: Skate) {
-
+  constructor(public navCtrl: NavController, public skate:SkateProvider) {
+    this.skate.getTags((tags) => console.log("provider:",tags));
   }
 
 
