@@ -14,12 +14,16 @@ export class HomePage {
   nick:string = "";
   description:string = "";
 
+
   constructor(public navCtrl: NavController, public skate:SkateProvider) {
-    this.skate.getTags((tags) => console.log("provider:",tags));
+    console.log("Skate version: ",this.skate.version);
+    //this.skate.getMedia(function(media){console.log(media)});
   }
 
 
   ionViewDidLoad(){
+    var names = [{ Name:'item-1', Value:false},
+             { Name:'item-2', Value:false}];
     // Get tags from skate database and create a checkbox tag list
     this.skate.getTags((tags)=>{
          this.tags=tags;
