@@ -72,6 +72,32 @@ public version: string = "1.0";
     xhrTag.send();
   }
 
+  getTour(callback){
+  var xhrTag =  new XMLHttpRequest();
+  xhrTag.open('GET', 'http://nile16.nu:5984/misc/tourInfo/', true);
+  xhrTag.onreadystatechange = function(response) {
+    if (xhrTag.readyState == 4) {
+      var rows = JSON.parse(xhrTag.response).value;
+      var result = [];
+      for (var i=0;i<rows.length;i++){
+        var temp = {
+        ort:null,
+        tid:null,
+        adress:null,
+        info:null
+        }
+        if (rows[i].ort) temp.ort = rows[i].ort;
+        if (rows[i].tid) temp.tid = rows[i].tid;
+        if (rows[i].adress) temp.adress = rows[i].adress;
+        if (rows[i].info) temp.info = rows[i].info;
+        result.push(temp);
+      }
+      callback(result);
+     }
+  }
+  xhrTag.send();
+}
+
     getExif(file,callback){
         var self=this;
         var fileReaderExif = new FileReader();
