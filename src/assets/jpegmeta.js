@@ -44,6 +44,8 @@ THE SOFTWARE.
  JpegMeta.JpegFile - Primary class for Javascript parsing
 */
 
+
+
 if (this.JpegMeta) {
     throw Error("Library included multiple times");
 }

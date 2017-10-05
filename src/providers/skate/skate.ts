@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+//import * as exif from '../../assets/jpegmeta.js';
 //import { Http } from '@angular/http';
 //import 'rxjs/add/operator/map';
 
@@ -8,6 +9,9 @@ import { Injectable } from '@angular/core';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+
+declare var JpegMeta;
+
 @Injectable()
 export class SkateProvider {
 
@@ -108,7 +112,7 @@ public version: string = "1.0";
             }
           }
           fileReader.onload = function (readerEvent) {
-            xhr2.send(readerEvent.target.result);
+            xhr2.send(this.result);
           };
           fileReader.readAsArrayBuffer(file);
         }

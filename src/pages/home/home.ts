@@ -3,6 +3,10 @@ import { NavController } from 'ionic-angular';
 //import {Platform, ionicBootstrap} from 'ionic-angular';
 import { SkateProvider } from '../../providers/skate/skate';
 
+declare var picture;
+declare var fileInput;
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -34,7 +38,7 @@ export class HomePage {
     var fileReaderImg = new FileReader();
   	this.file = e.target.files[0];
   	fileReaderImg.onload = function (readerEvent) {
-  		picture.src = readerEvent.target.result;
+  		picture.src = this.result;
   	}
   	fileReaderImg.readAsDataURL(fileInput.files[0]);
   });
@@ -52,7 +56,6 @@ uploadFile(){
   };
 
   // Check which tags are selected and add those to meta in the form of an array
-  //meta.tags = [];
   for (var i=0;i<this.tags.length;i++){
     if (this.tags[i].Value) meta.tags.push(this.tags[i].Name);
   }
